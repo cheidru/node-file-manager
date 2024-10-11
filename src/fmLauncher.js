@@ -1,3 +1,10 @@
+import { levelUp, toDirectory, workDirList } from 'nwdc.js';
+import { printFile, addEmptyFile, renameFile, copyFile, moveFile, removeFile } from 'fsc.js';
+import { osInfo } from 'osic.js';
+import { calcHash } from 'hashc.js';
+import { compressFile, decompressFile } from 'hashc.js';
+
+
 export function fmCommandLauncher(code) {
     const command = code.trim().toLowerCase().slice(0,1);
     let exitCode = '';
@@ -28,8 +35,10 @@ export function fmCommandLauncher(code) {
             exitCode = compressFile(code);
         case 'de':
             exitCode = decompressFile(code);
-        case 'exit':
+        case '.e':
             exitCode = 'exit';
+        default:
+            exitCode = 'input fail';
     }
 
     return exitCode;
