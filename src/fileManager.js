@@ -28,7 +28,12 @@ const fileManager = () => {
     do {
         console.log(`You are currently in ${workDir}\\`);
         const commandCode = prompt('Enter your command here: ');
-        fmCommandLauncher(commandCode);
+        const result = fmCommandLauncher(commandCode);
+        if(result === "input fail") {
+            console.log('Invalid input');
+        } else if (result === "operation fail") {
+            console.log('Operation fail');
+        }
      } while(!fileManagerExit)
 
     // const workPath = path.resolve('fileManager.js');
