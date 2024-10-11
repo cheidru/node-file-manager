@@ -29,16 +29,23 @@ const fileManager = () => {
         console.log(`You are currently in ${workDir}\\`);
         const commandCode = prompt('Enter your command here: ');
         const result = fmCommandLauncher(commandCode);
+
         if(result === "input fail") {
             console.log('Invalid input');
         } else if (result === "operation fail") {
-            console.log('Operation fail');
+            console.log('Operation failed');
+        } else if (result === "exit") {
+            fileManagerExit = true;
         }
+
+        process.on('SIGINT', function() {
+            fileManagerExit = true;
+        });
+
      } while(!fileManagerExit)
 
-    // const workPath = path.resolve('fileManager.js');
-    // const workDir = path.dirname(workPath);
-
+     console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
+     process.exit();
 }
 
 fileManager();
