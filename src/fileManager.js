@@ -1,59 +1,46 @@
-import path from 'node:path';
+// import path from 'node:path';
 import os from 'node:os';
-import { fmCommandLauncher } from 'fmLauncher';
+import fmLauncher from './fmLauncher.js';
 import readline from 'node:readline/promises';
 import process from 'node:process';
 
 export let workDir;
 
 const fileManager = () => {
+
     const arr = process.argv.slice(2);
-    const userName = arr[0].split('=')[1];
+    if(arr.length == 0) return console.log("add user name in format 'npm run start -- UserName'");
+    const userName = arr[0];
+
     console.log(`Welcome to the File Manager, ${userName}!`);
 
-    let fileManagerExit = false;
-    setWorkDir(os.homedir());
+    workDir = os.homedir();
     process.chdir(workDir);
-    root = '';
+    console.log(`You are currently in ${workDir}\\`);
 
-    const prompt = async(promptMSG) => {
-        const inputInterface = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-          });
-        
-        const userInput = await inputInterface.question(promptMSG);
-        inputInterface.close(); // close prompt
-        return userInput;
-    }
-
-    do {
+    const userCommand = readline.createInterface({ input: process.stdin, output: process.stdout });
+    userCommand.setPrompt('Enter your command here: ');
+    userCommand.prompt();
+    userCommand.on('line', (command) => {
+        if (command == '.exit') fmExit();
         console.log(`You are currently in ${workDir}\\`);
-        const commandCode = prompt('Enter your command here: ');
-        const result = fmCommandLauncher(commandCode);
+        fmLauncher(command);
+    })
+    userCommand.on('SIGINT', () => fmExit())
 
-        if(result === "input fail") {
-            console.log('Invalid input');
-        } else if (result === "operation fail") {
-            console.log('Operation failed');
-        } else if (result === "exit") {
-            fileManagerExit = true;
-        }
-        process.on('SIGINT', function() {
-            fileManagerExit = true;
-        });
-
-     } while(!fileManagerExit)
-
-     console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
-     process.exit();
+    function fmExit() {
+        console.log(`\nThank you for using File Manager, ${userName}, goodbye!`);
+        userCommand.close;
+        process.exit();
+    }
 }
 
 fileManager();
 
-export function setWorkDir(path) {
-     workDir = path;   
-}
+// export function setWorkDir(path) {
+//      workDir = path;   
+// }
+
 // npm run start -- --username=your_username
 // Welcome to the File Manager, Username!
 // You are currently in path_to_working_directory

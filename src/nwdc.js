@@ -1,7 +1,7 @@
 // Navigation & working directory commands
 import process from 'node:process';
-import parse from 'node:parse';
-import { workDir } from './fileManager';
+// import parse from 'node:parse';
+import { workDir } from './fileManager.js';
 
 export function levelUp() {
     const root = parse.root(workDir);

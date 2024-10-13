@@ -1,10 +1,10 @@
-import { levelUp, toDirectory, workDirList } from './nwdc.js';
-import { printFile, addEmptyFile, renameFile, copyFile, moveFile, removeFile } from './fsc.js';
-import { osInfo } from './osic.js';
-import { calcHash } from './hashc.js';
-import { compressFile, decompressFile } from './hashc.js';
+// import { levelUp, toDirectory, workDirList } from './nwdc.js';
+// import { printFile, addEmptyFile, renameFile, copyFile, moveFile, removeFile } from './fsc.js';
+// import { osInfo } from './osic.js';
+// import { calcHash } from './hashc.js';
+// import { compressFile, decompressFile } from './hashc.js';
 
-export function fmCommandLauncher(code) {
+export default function fmLauncher(code) {
     const command = code.trim().toLowerCase().slice(0,1);
     let exitCode = '';
     switch(command) {
