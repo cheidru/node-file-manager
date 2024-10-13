@@ -18,6 +18,7 @@ const fileManager = () => {
     process.chdir(workDir);
     console.log(`You are currently in ${workDir}\\`);
 
+    // https://www.geeksforgeeks.org/node-js-readline-module/
     const userCommand = readline.createInterface({ input: process.stdin, output: process.stdout });
     userCommand.setPrompt('Enter your command here: ');
     userCommand.prompt();
@@ -25,7 +26,9 @@ const fileManager = () => {
         if (command == '.exit') fmExit();
         console.log(`You are currently in ${workDir}\\`);
         fmLauncher(command);
+        userCommand.prompt();
     })
+
     userCommand.on('SIGINT', () => fmExit())
 
     function fmExit() {

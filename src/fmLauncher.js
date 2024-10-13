@@ -6,6 +6,7 @@
 
 export default function fmLauncher(code) {
     const command = code.trim().toLowerCase().slice(0,1);
+    console.log('command is ', command);
     let exitCode = '';
     switch(command) {
         case 'up':
@@ -34,9 +35,8 @@ export default function fmLauncher(code) {
             exitCode = compressFile(code);
         case 'de':
             exitCode = decompressFile(code);
-        case '.e':
-            exitCode = 'exit';
         default:
+            console.log('Wrong command');
             exitCode = 'input fail';
     }
 
