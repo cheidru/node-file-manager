@@ -1,7 +1,7 @@
 import { levelUp, toDirectory } from './nwdc.js';
 import { workDirList } from './lsc.js';
 import { printFile, addEmptyFile, renameFile, copyFile, moveFile, deleteFile } from './fsc.js';
-// import { osInfo } from './osic.js';
+import { osInfo } from './osic.js';
 // import { calcHash } from './hashc.js';
 // import { compressFile, decompressFile } from './hashc.js';
 
