@@ -1,6 +1,8 @@
 // Files commands
 import fs from 'node:fs/promises';
+import { createReadStream, createWriteStream } from 'node:fs';
 import path from 'node:path';
+import { pipeline } from 'node:stream/promises';
 
 export function printFile(code) {
   const workDir = process.cwd();
@@ -62,7 +64,19 @@ export function renameFile(code) {
   rename();
 }
 
-export function copyFile(code) {}
+export function copyFile(code) {
+  const readFile = code.split(' ')[1];
+  const writeFile = code.split(' ')[2];
+
+  async function copyIt() {
+    await pipeline(
+      createReadStream(readFile, { encoding: 'utf-8' }),
+      createWriteStream(writeFile, { encoding: 'utf-8' })
+    )
+  }
+  
+  copyIt().catch(console.error);
+}
 
 export function moveFile(code) {}
 
