@@ -4,7 +4,11 @@ import fmLauncher from './fmLauncher.js';
 import readline from 'node:readline/promises';
 import process from 'node:process';
 
+// export const workDirObj = {};
 export let workDir;
+export function workDirChange(newPath) {
+    workDir = newPath;
+}
 
 const fileManager = () => {
 
@@ -24,7 +28,6 @@ const fileManager = () => {
     userCommand.prompt();
     userCommand.on('line', (command) => {
         if (command == '.exit') fmExit();
-        console.log(`You are currently in ${workDir}\\`);
         fmLauncher(command);
         userCommand.prompt();
     })

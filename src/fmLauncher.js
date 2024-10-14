@@ -1,44 +1,57 @@
-// import { levelUp, toDirectory, workDirList } from './nwdc.js';
-// import { printFile, addEmptyFile, renameFile, copyFile, moveFile, removeFile } from './fsc.js';
+import { levelUp, toDirectory, workDirList } from './nwdc.js';
+import { printFile, addEmptyFile, renameFile, copyFile, moveFile, removeFile } from './fsc.js';
 // import { osInfo } from './osic.js';
 // import { calcHash } from './hashc.js';
 // import { compressFile, decompressFile } from './hashc.js';
+import { workDir } from './fileManager.js';
 
 export default function fmLauncher(code) {
-    const command = code.trim().toLowerCase().slice(0,1);
-    console.log('command is ', command);
+    const command = code.trim().toLowerCase().split(' ')[0];
     let exitCode = '';
     switch(command) {
         case 'up':
             exitCode = levelUp();
+            break;
         case 'cd':
             exitCode = toDirectory(code);
+            break;
         case 'ls':
             exitCode = workDirList();
-        case 'ca':
+            break;
+        case 'cat':
             exitCode = printFile(code);
-        case 'ad':
+            break;
+        case 'add':
             exitCode = addEmptyFile(code);
+            break;
         case 'rn':
             exitCode = renameFile(code);
+            break;
         case 'cp':
             exitCode = copyFile(code);
+            break;
         case 'mv':
             exitCode = moveFile(code);
+            break;
         case 'rm':
             exitCode = removeFile(code);
+            break;
         case 'os':
             exitCode = osInfo(code);
-        case 'ha':
+            break;
+        case 'hash':
             exitCode = calcHash(code);
-        case 'co':
+            break;
+        case 'compress':
             exitCode = compressFile(code);
-        case 'de':
+            break;
+        case 'decompress':
             exitCode = decompressFile(code);
+            break;
         default:
             console.log('Wrong command');
             exitCode = 'input fail';
     }
-
+    console.log(`You are currently in ${workDir}\\`);
     return exitCode;
 }
