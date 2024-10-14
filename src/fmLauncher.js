@@ -1,4 +1,5 @@
-import { levelUp, toDirectory, workDirList } from './nwdc.js';
+import { levelUp, toDirectory } from './nwdc.js';
+import { workDirList } from './lsc.js';
 import { printFile, addEmptyFile, renameFile, copyFile, moveFile, removeFile } from './fsc.js';
 // import { osInfo } from './osic.js';
 // import { calcHash } from './hashc.js';
