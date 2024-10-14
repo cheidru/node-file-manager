@@ -96,4 +96,15 @@ export function moveFile(code) {
   cloneIt().catch(console.error);
 }
 
-export function removeFile(code) {}
+export function deleteFile(code) {
+  const fileToDelete = path.resolve(code.split(' ')[1]);
+  const remove = async () => {
+    try {
+        await fs.rm(fileToDelete);
+    } catch (err) {
+        throw new Error("operation failed");
+    }
+};
+
+  remove();
+}

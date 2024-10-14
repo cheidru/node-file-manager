@@ -1,6 +1,6 @@
 import { levelUp, toDirectory } from './nwdc.js';
 import { workDirList } from './lsc.js';
-import { printFile, addEmptyFile, renameFile, copyFile, moveFile, removeFile } from './fsc.js';
+import { printFile, addEmptyFile, renameFile, copyFile, moveFile, deleteFile } from './fsc.js';
 // import { osInfo } from './osic.js';
 // import { calcHash } from './hashc.js';
 // import { compressFile, decompressFile } from './hashc.js';
@@ -34,7 +34,7 @@ export default function fmLauncher(code) {
             exitCode = moveFile(code);
             break;
         case 'rm':
-            exitCode = removeFile(code);
+            exitCode = deleteFile(code);
             break;
         case 'os':
             exitCode = osInfo(code);
