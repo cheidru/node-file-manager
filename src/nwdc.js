@@ -13,7 +13,6 @@ export function levelUp() {
 }
 
 export function toDirectory(code) {
-    const workDir = process.cwd();
     let folderName = path.normalize(code.split(' ')[1]);
     try {
         process.chdir(folderName);
