@@ -78,6 +78,22 @@ export function copyFile(code) {
   copyIt().catch(console.error);
 }
 
-export function moveFile(code) {}
+export function moveFile(code) {
+  const readFile = path.resolve(code.split(' ')[1]);
+  const fileName = path.parse(readFile).base;
+  const writeFile = path.join(path.resolve(code.split(' ')[2]), fileName);
+
+  async function cloneIt() {
+    const rStream = createReadStream(readFile, { encoding: 'utf8', flag: 'r' })
+    await pipeline(
+      rStream,
+      createWriteStream(writeFile, { encoding: 'utf8', flag: 'ax+' })
+    )
+    rStream.close();
+    fs.rm(readFile);
+  }
+  
+  cloneIt().catch(console.error);
+}
 
 export function removeFile(code) {}
