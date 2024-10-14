@@ -4,23 +4,15 @@ import fmLauncher from './fmLauncher.js';
 import readline from 'node:readline/promises';
 import process from 'node:process';
 
-// export const workDirObj = {};
-export let workDir;
-export function workDirChange(newPath) {
-    workDir = newPath;
-}
-
 const fileManager = () => {
-
     const arr = process.argv.slice(2);
     if(arr.length == 0) return console.log("add user name in format 'npm run start -- UserName'");
     const userName = arr[0];
 
     console.log(`Welcome to the File Manager, ${userName}!`);
 
-    workDir = os.homedir();
-    process.chdir(workDir);
-    console.log(`You are currently in ${workDir}\\`);
+    process.chdir(os.homedir());
+    console.log(`You are currently in ${process.cwd()}\\`);
 
     // https://www.geeksforgeeks.org/node-js-readline-module/
     const userCommand = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -29,6 +21,7 @@ const fileManager = () => {
     userCommand.on('line', (command) => {
         if (command == '.exit') fmExit();
         fmLauncher(command);
+        console.log(`You are currently in ${process.cwd()}\\`);
         userCommand.prompt();
     })
 

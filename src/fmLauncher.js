@@ -3,7 +3,6 @@ import { printFile, addEmptyFile, renameFile, copyFile, moveFile, removeFile } f
 // import { osInfo } from './osic.js';
 // import { calcHash } from './hashc.js';
 // import { compressFile, decompressFile } from './hashc.js';
-import { workDir } from './fileManager.js';
 
 export default function fmLauncher(code) {
     const command = code.trim().toLowerCase().split(' ')[0];
@@ -52,6 +51,5 @@ export default function fmLauncher(code) {
             console.log('Wrong command');
             exitCode = 'input fail';
     }
-    console.log(`You are currently in ${workDir}\\`);
     return exitCode;
 }
