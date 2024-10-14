@@ -10,8 +10,11 @@ export function workDirList() {
       const dirMembers = await fs.readdir(workDir, { withFileTypes: true });
       const res = [];
       for (let member of dirMembers) {
+        let memName = member.name;
+        // if(member.name.length/2 > 0) memName = member.name + ' ';
+        if(member.name.length > 30) memName = member.name.slice(0, 30) + '...';
         res.push({
-            name: member.name,
+            name: memName,
             type: member.isDirectory()? 'directory' : 'file'
           }
         )
